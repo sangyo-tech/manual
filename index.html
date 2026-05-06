@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>産業技術アカデミー 使用マニュアル v2</title>
+<style>
+:root{
+  --navy:#0F1A45;
+  --navy-mid:#1E2761;
+  --ice:#CADCFC;
+  --gold:#D4A017;
+  --gold-bright:#F2B33D;
+  --green:#22C55E;
+  --pink:#EC4899;
+  --bg:#FFFFFF;
+  --bg-alt:#F8FAFC;
+  --text:#0A0F1F;
+  --text2:#475569;
+  --muted:#94A3B8;
+  --border:#E2E8F0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo','Noto Sans JP',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.75;-webkit-font-smoothing:antialiased;letter-spacing:.01em;font-size:17px}
+img,svg{max-width:100%;display:block}
+
+.page{max-width:1180px;margin:0 auto;padding:60px 48px;page-break-after:always;position:relative}
+.page:last-child{page-break-after:auto}
+.page-dark{background:var(--navy);color:#fff;max-width:none;padding:60px 0}
+.page-dark .inner{max-width:1180px;margin:0 auto;padding:0 48px}
+
+/* ============= COVER ============= */
+.cover{min-height:100vh;background:radial-gradient(ellipse at top right,#2A3473 0%,var(--navy) 60%);color:#fff;padding:0;max-width:none;display:flex;align-items:center;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(212,160,23,.18) 0%,transparent 70%);pointer-events:none}
+.cover::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(202,220,252,.12) 0%,transparent 70%);pointer-events:none}
+.cover-inner{max-width:1180px;margin:0 auto;padding:80px 60px;width:100%;position:relative;z-index:1;text-align:center}
+.cover .brand-row{display:flex;align-items:center;gap:14px;margin-bottom:48px;justify-content:center}
+.cover .brand-mark{width:48px;height:48px;background:var(--gold);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.4rem;border-radius:8px;letter-spacing:-1px}
+.cover .brand-text{font-size:.78rem;letter-spacing:4px;color:var(--ice);opacity:.85;text-transform:uppercase;text-align:left}
+.cover .brand-text strong{display:block;font-size:1.2rem;letter-spacing:.5px;color:#fff;margin-top:4px;font-weight:600}
+.cover h1{font-size:5.6rem;font-weight:800;line-height:1.1;margin-bottom:28px;letter-spacing:-.02em}
+.cover h1 .accent{color:var(--gold-bright)}
+.cover .lead{font-size:1.55rem;color:var(--ice);max-width:1100px;line-height:1.55;margin:0 auto 64px;font-weight:400}
+.cover .meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(202,220,252,.18);border-radius:14px;overflow:hidden;max-width:920px;margin-left:auto;margin-right:auto;border:1px solid rgba(202,220,252,.18)}
+.cover .meta-cell{background:rgba(15,26,69,.6);backdrop-filter:blur(12px);padding:24px;text-align:center}
+.cover .meta-label{font-size:.78rem;letter-spacing:2px;color:var(--ice);opacity:.75;text-transform:uppercase;margin-bottom:10px}
+.cover .meta-value{font-size:1.18rem;font-weight:700;color:#fff}
+.cover .badge-row{display:flex;gap:10px;margin-top:48px;flex-wrap:wrap;justify-content:center}
+.cover .badge{padding:10px 18px;background:rgba(255,255,255,.08);border:1px solid rgba(202,220,252,.3);border-radius:24px;font-size:1rem;color:var(--ice);font-weight:500}
+.cover .badge.gold{background:rgba(212,160,23,.18);border-color:rgba(212,160,23,.45);color:var(--gold-bright)}
+
+/* ============= TOC ============= */
+.toc{background:linear-gradient(180deg,#fff 0%,var(--bg-alt) 100%)}
+.toc h2{color:var(--navy);font-size:3.4rem;font-weight:800;margin-bottom:14px;letter-spacing:-.02em}
+.toc h2 .gold{color:var(--gold)}
+.toc .lead{color:var(--text2);font-size:1.25rem;margin-bottom:56px;max-width:780px;line-height:1.7}
+.toc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.toc-card{padding:32px 28px;background:#fff;border-radius:18px;box-shadow:0 8px 28px rgba(15,26,69,.10);border:3px solid var(--navy);transition:all .2s;position:relative;overflow:hidden}
+.toc-card.s2{border-color:var(--gold);background:linear-gradient(180deg,#FFFAEB 0%,#fff 60%);box-shadow:0 8px 28px rgba(212,160,23,.16)}
+.toc-card.s3{border-color:var(--green);background:linear-gradient(180deg,#F0FDF4 0%,#fff 60%);box-shadow:0 8px 28px rgba(34,197,94,.16)}
+.toc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:var(--navy)}
+.toc-card.s2::before{background:var(--gold)}
+.toc-card.s3::before{background:var(--green)}
+.toc-card .num{font-size:3.4rem;font-weight:900;color:var(--bg-alt);line-height:1;margin-bottom:8px;font-family:Georgia,serif}
+.toc-card.s2 .num{color:#FEF3C7}
+.toc-card.s3 .num{color:#DCFCE7}
+.toc-card .badge{display:inline-block;padding:5px 12px;background:var(--navy);color:#fff;border-radius:6px;font-size:.7rem;letter-spacing:1.5px;margin-bottom:14px;font-weight:700}
+.toc-card.s2 .badge{background:var(--gold)}
+.toc-card.s3 .badge{background:var(--green)}
+.toc-card h3{font-size:1.5rem;margin-bottom:18px;color:var(--navy);font-weight:700;line-height:1.4}
+.toc-card ul{list-style:none;padding:0}
+.toc-card li{font-size:1.05rem;color:var(--text2);padding:12px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.toc-card li:last-child{border-bottom:none}
+.toc-card li .num-sm{color:var(--muted);font-weight:700;font-size:.78rem;min-width:22px}
+
+/* ============= SECTION DIVIDER ============= */
+.divider{padding:140px 0 120px;text-align:center;position:relative;overflow:hidden;min-height:340px}
+.divider::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(212,160,23,.14) 0%,transparent 60%);pointer-events:none}
+.divider .num-huge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:22rem;font-weight:900;color:rgba(202,220,252,.05);line-height:.8;font-family:Georgia,serif;letter-spacing:-.05em;z-index:0;user-select:none;pointer-events:none;white-space:nowrap}
+.divider .inner{position:relative;z-index:1}
+.divider .label{display:inline-block;padding:8px 22px;background:var(--gold);color:var(--navy);border-radius:24px;font-size:.85rem;letter-spacing:2px;font-weight:800;margin-bottom:24px;text-transform:uppercase}
+.divider h2{font-size:4rem;font-weight:800;margin:0 0 20px;letter-spacing:-.02em;color:#fff;line-height:1.15}
+.divider p{color:var(--ice);font-size:1.3rem;max-width:740px;margin:20px auto 0;opacity:.95;line-height:1.7;padding:0 24px}
+
+/* ============= SLIDE BASE ============= */
+.slide{padding:72px 56px}
+.slide-tag{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.slide-tag .num-circle{width:52px;height:52px;background:var(--navy);color:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.15rem;font-family:Georgia,serif}
+.slide-tag.gold .num-circle{background:var(--gold)}
+.slide-tag.green .num-circle{background:var(--green)}
+.slide-tag .label{font-size:.85rem;letter-spacing:2.5px;color:var(--text2);font-weight:700;text-transform:uppercase}
+.slide h2{font-size:3rem;color:var(--navy);margin-bottom:18px;font-weight:800;line-height:1.3;letter-spacing:-.02em}
+.slide h2 .gold{color:var(--gold)}
+.slide .lead{font-size:1.3rem;color:var(--text2);margin-bottom:48px;max-width:920px;line-height:1.7}
+
+/* ============= TWO COLUMN ============= */
+.two-col{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start;margin-top:32px}
+.two-col-rev{grid-template-columns:1fr 1.1fr}
+
+/* ============= PREVIEW ============= */
+.preview{border-radius:14px;overflow:hidden;box-shadow:0 12px 32px rgba(15,26,69,.12),0 0 0 1px var(--border);background:#fff;position:relative}
+.preview-head{background:linear-gradient(180deg,#F1F5F9 0%,#E2E8F0 100%);padding:11px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;font-size:.78rem;color:var(--text2);font-family:Consolas,monospace;font-weight:500}
+.preview-dots{display:flex;gap:6px}
+.preview-dots span{width:11px;height:11px;border-radius:50%;background:#CBD5E1}
+.preview-dots span:nth-child(1){background:#FF5F56}
+.preview-dots span:nth-child(2){background:#FFBD2E}
+.preview-dots span:nth-child(3){background:#27CA3F}
+.preview iframe{width:100%;height:420px;border:0;display:block;background:#fff}
+
+/* ============= CALLOUTS ============= */
+.callouts{display:flex;flex-direction:column;gap:20px}
+.callout{padding:26px 28px;background:#fff;border-radius:14px;border-left:6px solid var(--navy);border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border);box-shadow:0 4px 14px rgba(15,26,69,.10);position:relative;overflow:hidden}
+.callout.gold{border-left-color:var(--gold);background:linear-gradient(135deg,#FFFAEB 0%,#fff 60%)}
+.callout.green{border-left-color:var(--green);background:linear-gradient(135deg,#F0FDF4 0%,#fff 60%)}
+.callout.pink{border-left-color:var(--pink);background:linear-gradient(135deg,#FDF2F8 0%,#fff 60%)}
+.callout-head{display:flex;align-items:center;gap:16px;margin-bottom:10px}
+.callout .ic{flex-shrink:0;width:42px;height:42px;background:var(--navy);color:#fff;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800}
+.callout.gold .ic{background:var(--gold)}
+.callout.green .ic{background:var(--green)}
+.callout.pink .ic{background:var(--pink)}
+.callout strong{color:var(--navy);font-size:1.18rem;font-weight:700}
+.callout p{font-size:1.02rem;color:var(--text2);margin-left:58px;line-height:1.7;margin-top:-4px}
+
+/* ============= STAT BLOCKS ============= */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px}
+.stat-card{padding:36px 28px;background:linear-gradient(135deg,var(--bg-alt) 0%,#fff 100%);border-radius:18px;border:2px solid var(--navy);position:relative;overflow:hidden;box-shadow:0 6px 18px rgba(15,26,69,.10)}
+.stat-card::before{content:'';position:absolute;top:0;right:0;width:100px;height:100px;background:radial-gradient(circle,rgba(15,26,69,.06) 0%,transparent 70%);border-radius:50%;transform:translate(30%,-30%)}
+.stat-card.featured{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);color:#fff;border:none}
+.stat-card.featured::before{background:radial-gradient(circle,rgba(212,160,23,.25) 0%,transparent 70%)}
+.stat-card .stat-num{font-size:4rem;font-weight:900;line-height:1;margin-bottom:8px;color:var(--navy);letter-spacing:-.04em;font-family:Georgia,serif}
+.stat-card.featured .stat-num{color:var(--gold-bright)}
+.stat-card .stat-num .unit{font-size:1.1rem;font-weight:700;color:var(--text2);margin-left:6px;font-family:'Hiragino Kaku Gothic ProN',sans-serif;letter-spacing:0}
+.stat-card.featured .stat-num .unit{color:var(--ice)}
+.stat-card .stat-label{font-size:1.1rem;color:var(--text2);font-weight:600;margin-top:16px;line-height:1.5}
+.stat-card.featured .stat-label{color:var(--ice)}
+.stat-card .stat-desc{font-size:.95rem;color:var(--muted);margin-top:14px;line-height:1.7}
+.stat-card.featured .stat-desc{color:rgba(202,220,252,.75)}
+
+/* ============= STEPS ============= */
+.steps{display:flex;flex-direction:column;gap:6px;margin-top:32px}
+.step-row{display:flex;gap:24px;padding:24px 0;border-bottom:2px dashed var(--border);position:relative}
+.step-row:last-child{border-bottom:none}
+.step-num-big{flex-shrink:0;width:72px;height:72px;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);color:var(--gold-bright);border-radius:18px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.9rem;font-family:Georgia,serif;box-shadow:0 4px 12px rgba(15,26,69,.18)}
+.step-content{flex:1}
+.step-content h4{font-size:1.32rem;color:var(--navy);margin-bottom:8px;font-weight:700}
+.step-content p{font-size:1.05rem;color:var(--text2);line-height:1.7}
+
+/* ============= URL BOX ============= */
+.url-box{display:inline-block;padding:6px 12px;background:#0F172A;color:var(--ice);border-radius:6px;font-family:Consolas,monospace;font-size:.82rem;margin:4px 4px 4px 0;font-weight:500}
+
+/* ============= PRICE TABLE ============= */
+.price-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px}
+.price-card{padding:36px 28px;background:#fff;border:3px solid var(--navy);border-radius:20px;text-align:center;position:relative;transition:transform .2s;box-shadow:0 6px 20px rgba(15,26,69,.10)}
+.price-card.highlight{border-color:var(--gold);background:linear-gradient(180deg,#FFFAEB 0%,#fff 100%);transform:scale(1.03);box-shadow:0 12px 32px rgba(212,160,23,.18)}
+.price-card.highlight::before{content:'おすすめ';position:absolute;top:-14px;left:50%;transform:translateX(-50%);padding:6px 18px;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-bright) 100%);color:var(--navy);border-radius:24px;font-size:.75rem;font-weight:800;letter-spacing:1px;box-shadow:0 4px 12px rgba(212,160,23,.4)}
+.price-card .plan-tag{display:inline-block;padding:4px 12px;background:var(--bg-alt);color:var(--text2);border-radius:6px;font-size:.72rem;font-weight:700;letter-spacing:1px;margin-bottom:18px;text-transform:uppercase}
+.price-card.highlight .plan-tag{background:var(--gold);color:var(--navy)}
+.price-card h4{color:var(--navy);font-size:1.15rem;font-weight:700;margin-bottom:12px}
+.price-card .amount{font-size:2.6rem;font-weight:900;color:var(--navy);margin-bottom:4px;font-family:Georgia,serif;letter-spacing:-.03em;line-height:1}
+.price-card .amount .small{font-size:.95rem;color:var(--text2);font-weight:500;margin-left:4px;font-family:'Hiragino Kaku Gothic ProN',sans-serif}
+.price-card .desc{font-size:.95rem;color:var(--text2);margin-top:16px;line-height:1.7}
+.price-card .strike{color:var(--muted);text-decoration:line-through;font-size:1.05rem;margin-bottom:6px}
+
+/* ============= FAQ ============= */
+.faq{margin-top:36px}
+.faq-item{padding:22px 0;border-bottom:1px solid var(--border)}
+.faq-item:first-child{border-top:1px solid var(--border)}
+.faq-q{font-weight:700;color:var(--navy);margin-bottom:12px;font-size:1.2rem;display:flex;align-items:center;gap:12px}
+.faq-q .q-mark{flex-shrink:0;width:34px;height:34px;background:var(--gold);color:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.05rem;font-weight:900;font-family:Georgia,serif}
+.faq-a{font-size:1.05rem;color:var(--text2);padding-left:46px;line-height:1.75}
+.faq-a strong{color:var(--navy)}
+
+/* ============= NOTE ============= */
+.note{margin-top:36px;padding:24px 28px;background:linear-gradient(135deg,#FFFAEB 0%,#FEF3C7 100%);border-left:5px solid var(--gold);border-radius:0 12px 12px 0;font-size:1.05rem;color:#7C5A00;line-height:1.75}
+.note strong{color:#5B4400;font-weight:800}
+.note .label-tag{display:inline-block;padding:3px 10px;background:var(--gold);color:#fff;border-radius:4px;font-size:.7rem;font-weight:700;letter-spacing:1px;margin-right:10px;text-transform:uppercase}
+
+/* ============= TIPS ============= */
+.tips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:32px}
+.tip{padding:32px 26px;background:#fff;border-radius:18px;text-align:left;border:3px solid var(--navy);transition:all .2s;position:relative;box-shadow:0 6px 20px rgba(15,26,69,.12)}
+.tip.gold{border-color:var(--gold);background:linear-gradient(180deg,#FFFAEB 0%,#fff 80%);box-shadow:0 6px 20px rgba(212,160,23,.18)}
+.tip.green{border-color:var(--green);background:linear-gradient(180deg,#F0FDF4 0%,#fff 80%);box-shadow:0 6px 20px rgba(34,197,94,.18)}
+.tip-emoji{font-size:2.4rem;margin-bottom:14px;display:block}
+.tip h4{color:var(--navy);font-size:1.3rem;font-weight:700;margin-bottom:12px;line-height:1.4}
+.tip p{font-size:1.05rem;color:var(--text2);line-height:1.7}
+
+/* ============= FOOTER ============= */
+footer.doc-footer{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);color:#fff;padding:60px 48px;text-align:center}
+footer.doc-footer .links{margin-bottom:24px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+footer.doc-footer a{color:var(--ice);padding:6px 14px;border-radius:6px;background:rgba(255,255,255,.08);text-decoration:none;font-size:.85rem;transition:background .2s}
+footer.doc-footer a:hover{background:rgba(255,255,255,.16)}
+footer.doc-footer .copy{color:rgba(202,220,252,.6);font-size:.8rem;margin-top:16px}
+footer.doc-footer .brand-foot{font-size:.7rem;letter-spacing:3px;color:var(--gold-bright);font-weight:700;text-transform:uppercase;margin-bottom:8px}
+
+/* ============= PRINT ============= */
+@media print{
+  .page{page-break-after:always;padding:30px}
+  body{background:#fff}
+  .preview iframe{display:none}
+  .preview::after{content:'※ライブプレビューは印刷では表示されません。Webブラウザでご覧ください。';display:block;padding:80px 40px;text-align:center;color:var(--muted);font-size:.85rem;background:var(--bg-alt)}
+  .cover{min-height:auto}
+}
+
+@media (max-width:980px){
+  .two-col,.two-col-rev{grid-template-columns:1fr}
+  .toc-grid,.stat-grid,.price-row,.tips-grid{grid-template-columns:1fr}
+  .cover .meta-grid{grid-template-columns:repeat(2,1fr)}
+  .cover h1{font-size:3rem}
+  .slide h2{font-size:2rem}
+  .divider .num-huge{font-size:8rem}
+  .divider h2{font-size:2.2rem;margin-top:-30px}
+}
+</style>
+</head>
+<body>
+
+<!-- =========================== COVER =========================== -->
+<div class="page cover">
+  <div class="cover-inner">
+    <div class="brand-row">
+      <div class="brand-mark">産</div>
+      <div class="brand-text">SANGYO TECH ACADEMY<strong>USER MANUAL v1.8</strong></div>
+    </div>
+    <h1>製造業の品質教育を、<br><span class="accent">仕組み化する。</span></h1>
+    <p class="lead">動画・音声・確認テストで、理解度を可視化する企業向けeラーニング。</p>
+    <div class="badge-row">
+      <span class="badge gold">⭐ 46コース／394本+のコンテンツ</span>
+      <span class="badge">✓ 4,640問+の理解度テスト</span>
+      <span class="badge">📱 スマホ対応</span>
+      <span class="badge">💼 1名から契約可能</span>
+    </div>
+    <div class="meta-grid" style="margin-top:64px;grid-template-columns:repeat(3,1fr)">
+      <div class="meta-cell">
+        <div class="meta-label">対象</div>
+        <div class="meta-value">受講者・管理者</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">サービス</div>
+        <div class="meta-value">産業技術アカデミー</div>
+      </div>
+      <div class="meta-cell">
+        <div class="meta-label">提供</div>
+        <div class="meta-value">Qulio合同会社</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================== TOC =========================== -->
+<div class="page toc">
+  <h2>目次</h2>
+  <p class="lead">役割別に3つのセクションで整理しています。</p>
+  <div class="toc-grid">
+    <div class="toc-card">
+      <div class="num">01</div>
+      <span class="badge">SECTION 1</span>
+      <h3>サービス概要</h3>
+      <ul>
+        <li><span class="num-sm">01</span>産業技術アカデミーとは</li>
+        <li><span class="num-sm">02</span>3つの特長を数字で</li>
+        <li><span class="num-sm">03</span>コース構成と分類</li>
+        <li><span class="num-sm">04</span>助成金活用</li>
+      </ul>
+    </div>
+    <div class="toc-card s2">
+      <div class="num">02</div>
+      <span class="badge">SECTION 2</span>
+      <h3>学習フロー</h3>
+      <ul>
+        <li><span class="num-sm">05</span>受講開始の流れ</li>
+        <li><span class="num-sm">06</span>動画視聴の流れ</li>
+        <li><span class="num-sm">07</span>確認テスト機能</li>
+        <li><span class="num-sm">08</span>学習継続のコツ</li>
+      </ul>
+    </div>
+    <div class="toc-card s3">
+      <div class="num">03</div>
+      <span class="badge">SECTION 3</span>
+      <h3>運用フロー</h3>
+      <ul>
+        <li><span class="num-sm">09</span>申込み・契約フロー</li>
+        <li><span class="num-sm">10</span>料金プラン詳細</li>
+        <li><span class="num-sm">11</span>お問い合わせ・サポート</li>
+        <li><span class="num-sm">12</span>よくある質問</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- =========================== SECTION 1 =========================== -->
+<div class="page-dark divider">
+  <div class="num-huge">01</div>
+  <div class="inner">
+    <span class="label">Section One</span>
+    <h2>サービス概要</h2>
+    <p>産業技術アカデミーの全体像。</p>
+  </div>
+</div>
+
+<!-- 01 -->
+<div class="page slide">
+  <div class="slide-tag"><div class="num-circle">01</div><span class="label">Service Overview · 1 of 12</span></div>
+  <h2>産業技術アカデミー：1人ひとりの理解度を<span class="gold">見える化</span>する</h2>
+  <p class="lead">「品質管理」を中心とした製造業特化のeラーニング。動画・音声・確認テストの3要素で、現場で使える知識への変換を仕組み化します。</p>
+  <div class="two-col">
+    <div class="preview">
+      <div class="preview-head"><div class="preview-dots"><span></span><span></span><span></span></div>https://sangyo-tech.jp/</div>
+      <iframe src="https://sangyo-tech.jp/" loading="lazy" title="トップページ"></iframe>
+    </div>
+    <div class="callouts">
+      <div class="callout">
+        <div class="callout-head"><div class="ic">A</div><strong>製造業特化</strong></div>
+        <p>品質管理・ISO・GMP・HACCP・QC検定・薬機法など、製造業の現場に必要な知識を体系的に提供。</p>
+      </div>
+      <div class="callout gold">
+        <div class="callout-head"><div class="ic">B</div><strong>1本5分前後の短尺動画</strong></div>
+        <p>すきま時間で学べるよう最適化。スマホ完全対応で通勤中の学習も可能。</p>
+      </div>
+      <div class="callout green">
+        <div class="callout-head"><div class="ic">C</div><strong>確認テスト4,640問+</strong></div>
+        <p>動画ごとに理解度テスト。「教えたつもり・分かったつもり」を排除し、定着を促進。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 02 -->
+<div class="page slide" style="background:var(--bg-alt)">
+  <div class="slide-tag"><div class="num-circle">02</div><span class="label">By the numbers · 2 of 12</span></div>
+  <h2>3つの数字で<span class="gold">語る</span>業界最大級のボリューム</h2>
+  <p class="lead">詰込みではなく「現場で使える」を徹底した、体系的・継続的に進化するコンテンツ群。</p>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-num">394<span class="unit">本+</span></div>
+      <div class="stat-label">総コンテンツ数<br>動画194本＋音声200本</div>
+      <div class="stat-desc">2026年内に500本へ拡充予定。月5本以上が継続追加され、追加料金は不要。</div>
+    </div>
+    <div class="stat-card featured">
+      <div class="stat-num">46<span class="unit">コース</span></div>
+      <div class="stat-label">体系的なカリキュラム</div>
+      <div class="stat-desc">入門から管理職・ISO・業界別まで網羅。レベル別／業界別／目的別／職種別の4軸で整理。</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">4,640<span class="unit">問+</span></div>
+      <div class="stat-label">理解度テスト</div>
+      <div class="stat-desc">動画ごとに確認テスト。コース別／カテゴリ別／無料体験の3軸すべて稼働中。</div>
+    </div>
+  </div>
+  <div class="note"><span class="label-tag">POINT</span><strong>「短く・確認・現場で使う」</strong>の3軸で設計。短尺で学び、テストで確認、業務で使う流れを1サービスで完結します。</div>
+</div>
+
+<!-- 03 -->
+<div class="page slide">
+  <div class="slide-tag"><div class="num-circle">03</div><span class="label">Course Structure · 3 of 12</span></div>
+  <h2>4つの切り口で、あなたに合うルートが見つかる</h2>
+  <p class="lead">46コースを目的・業界・職種・レベルから自由に検索可能。受講者が自分のペース・順序で学べます。</p>
+  <div class="two-col-rev">
+    <div class="callouts">
+      <div class="callout">
+        <div class="callout-head"><div class="ic">L</div><strong>レベル別（46コース）</strong></div>
+        <p>新人入門 → 基礎 → 中級 → 管理職 → 専門の5段階で、習熟度に応じて段階学習。</p>
+      </div>
+      <div class="callout gold">
+        <div class="callout-head"><div class="ic">I</div><strong>業界別（6業界）</strong></div>
+        <p>医薬品（GMP・GVP）／化粧品（ISO22716）／食品（HACCP）／自動車（IATF16949）／電機・電子／一般製造業をカバー。</p>
+      </div>
+      <div class="callout green">
+        <div class="callout-head"><div class="ic">P</div><strong>目的別・職種別</strong></div>
+        <p>ISO取得・QC検定・新人教育・品管立ち上げ等、目的から逆引き。職種では設計・製造・品質保証・管理職別に整理。</p>
+      </div>
+    </div>
+    <div class="preview">
+      <div class="preview-head"><div class="preview-dots"><span></span><span></span><span></span></div>https://course.sangyo-tech.jp/</div>
+      <iframe src="https://course.sangyo-tech.jp/" loading="lazy" title="コース一覧"></iframe>
+    </div>
+  </div>
+  <p style="margin-top:24px;font-size:.92rem;color:var(--text2)">📚 コース一覧 <span class="url-box">course.sangyo-tech.jp</span> ／ コンテンツ単体検索 <span class="url-box">contents.sangyo-tech.jp</span></p>
+</div>
+
+<!-- 04 -->
+<div class="page slide" style="background:var(--bg-alt)">
+  <div class="slide-tag gold"><div class="num-circle">04</div><span class="label">Subsidy · 4 of 12</span></div>
+  <h2>助成金活用で実質負担額を<span class="gold">最大75%軽減</span></h2>
+  <p class="lead">厚生労働省「人材開発支援助成金（事業展開等リスキリング支援コース）」を活用すれば、訓練経費の最大75%が助成されます。</p>
+  <div class="stat-grid" style="grid-template-columns:1.1fr 1fr">
+    <div class="stat-card featured" style="padding:48px 36px">
+      <div style="font-size:.78rem;letter-spacing:2px;color:var(--ice);text-transform:uppercase;margin-bottom:14px;font-weight:700">中小企業の場合の試算例</div>
+      <div style="display:flex;align-items:flex-end;gap:32px;flex-wrap:wrap">
+        <div>
+          <div style="font-size:.75rem;color:var(--ice);opacity:.85;margin-bottom:4px">企業契約プラン月額（1人）</div>
+          <div style="font-size:2.6rem;font-weight:900;color:#fff;font-family:Georgia,serif;line-height:1">¥3,300</div>
+          <div style="font-size:.78rem;color:var(--ice);opacity:.7">税込</div>
+        </div>
+        <div style="font-size:2rem;color:var(--gold-bright);align-self:center">→</div>
+        <div>
+          <div style="font-size:.75rem;color:var(--gold-bright);margin-bottom:4px;font-weight:700">助成金活用後の実質負担</div>
+          <div style="font-size:3rem;font-weight:900;color:var(--gold-bright);font-family:Georgia,serif;line-height:1">¥825</div>
+          <div style="font-size:.78rem;color:var(--ice);opacity:.7">75%助成後</div>
+        </div>
+      </div>
+    </div>
+    <div class="callouts">
+      <div class="callout gold">
+        <div class="callout-head"><div class="ic">!</div><strong>適用条件</strong></div>
+        <p>「事業展開等リスキリング」要件を満たす必要。訓練開始日の原則1ヶ月前までに「訓練実施計画届」を管轄労働局へ提出。</p>
+      </div>
+      <div class="callout pink">
+        <div class="callout-head"><div class="ic">📅</div><strong>期間限定制度</strong></div>
+        <p>令和4〜8年度（〜2027年3月）の期間限定。社労士等の専門家へ事前相談を推奨します。</p>
+      </div>
+    </div>
+  </div>
+  <div class="note"><span class="label-tag">注意</span>産業技術アカデミーは申請主体ではありません。受給可否・実際の助成額は申請内容と審査により異なります。最新情報は厚生労働省パンフレットを必ずご確認ください。</div>
+</div>
+
+<!-- =========================== SECTION 2 =========================== -->
+<div class="page-dark divider" style="background:linear-gradient(135deg,var(--navy) 0%,#2A3473 100%)">
+  <div class="num-huge">02</div>
+  <div class="inner">
+    <span class="label" style="background:var(--gold-bright)">Section Two</span>
+    <h2>学習フロー</h2>
+    <p>受講者向けの学習フロー。スマホ片手で完結。</p>
+  </div>
+</div>
+
+<!-- 05 -->
+<div class="page slide">
+  <div class="slide-tag gold"><div class="num-circle">05</div><span class="label">Get Started · 5 of 12</span></div>
+  <h2>受講開始の流れ：お振込みからログインまで</h2>
+  <p class="lead">企業契約後、お振込みの確認が完了次第、ログイン用のID・パスワードを管理者宛にお送りします。受講者の皆さまは管理者から共有された情報でログインしてご利用開始ください。</p>
+  <div class="steps">
+    <div class="step-row">
+      <div class="step-num-big">1</div>
+      <div class="step-content">
+        <h4>契約・お振込み完了</h4>
+        <p>企業契約のお手続きとご請求金額のお振込み（または初回カード決済）を完了してください。</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num-big">2</div>
+      <div class="step-content">
+        <h4>パスワード発行(重要)</h4>
+        <p><strong style="color:var(--navy)">お振込み確認後、運営から管理者宛にログインID・パスワードをメール送付</strong>します。発行までに営業日内で1〜2営業日いただく場合があります。</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num-big">3</div>
+      <div class="step-content">
+        <h4>受講者へID・パスワード共有</h4>
+        <p>管理者から各受講者へID・パスワードを共有。可能であれば<strong>受講者ごとに個別IDを付与</strong>するとログイン履歴・進捗管理がしやすくなります。</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num-big">4</div>
+      <div class="step-content">
+        <h4>サイトアクセス・ログイン</h4>
+        <p>受講者は <span class="url-box">sangyo-tech.jp</span> または案内メールのURLからアクセス。配布されたID・パスワードを入力してログインします。スマホ・PC・タブレット対応。</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num-big">5</div>
+      <div class="step-content">
+        <h4>コース選択</h4>
+        <p>レベル別／業界別／目的別／職種別の<strong>4軸</strong>から自分に合うコースを選択。各コースの動画数・想定学習時間を事前確認できます。</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <div class="step-num-big">6</div>
+      <div class="step-content">
+        <h4>動画視聴・確認テスト受験</h4>
+        <p>動画を視聴したら、続けて確認テストへ。理解度を即時チェックし、解説付きで再挑戦も可能。詳細は次ページで解説します。</p>
+      </div>
+    </div>
+  </div>
+  <div class="note"><span class="label-tag">企業契約</span>企業契約後は<strong>394本以上の全コンテンツが見放題</strong>。1人ひとりに個別IDを発行することで、ログイン履歴・進捗管理が可能です。</div>
+</div>
+
+<!-- 06 -->
+<div class="page slide" style="background:var(--bg-alt)">
+  <div class="slide-tag gold"><div class="num-circle">06</div><span class="label">Watch Videos · 6 of 12</span></div>
+  <h2>動画視聴の流れ</h2>
+  <p class="lead">コース選択 → 動画視聴 → 関連動画への誘導 → 確認テスト の流れで、自然と学習が継続する設計。</p>
+  <div class="two-col-rev">
+    <div class="callouts">
+      <div class="callout">
+        <div class="callout-head"><div class="ic">①</div><strong>コース or 動画一覧から選ぶ</strong></div>
+        <p>各コースには「<strong>動画一覧</strong>（コース全体）」と「<strong>動画別</strong>（個別ピックアップ）」の2つのタブがあります。順序通り学ぶなら動画一覧、興味のあるテーマだけ見たいなら動画別がおすすめ。</p>
+      </div>
+      <div class="callout gold">
+        <div class="callout-head"><div class="ic">②</div><strong>視聴中の操作</strong></div>
+        <p>一時停止・<strong>再生速度（0.5x〜2x）</strong>・全画面・音量調整・シークバーで好きな位置にジャンプ。スマホでは縦横自動回転、ピンチでズーム可能。</p>
+      </div>
+      <div class="callout green">
+        <div class="callout-head"><div class="ic">③</div><strong>視聴後 → 確認テストへ</strong></div>
+        <p>視聴完了後は同じページ内の「カテゴリ別」「コース別」確認テストタブへワンクリック移動。動画で学んだ内容をその場でアウトプット練習。</p>
+      </div>
+      <div class="callout pink">
+        <div class="callout-head"><div class="ic">④</div><strong>視聴管理（追加予定）</strong></div>
+        <p>動画ごとの完了率・最終視聴日時を自動記録。管理者は社員ごとの進捗を一覧で可視化できる機能を準備中。</p>
+      </div>
+    </div>
+    <div class="preview">
+      <div class="preview-head"><div class="preview-dots"><span></span><span></span><span></span></div>course.sangyo-tech.jp（視聴ページ例）</div>
+      <iframe src="https://course.sangyo-tech.jp/" loading="lazy" title="動画視聴ページ"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- 07 -->
+<div class="page slide">
+  <div class="slide-tag gold"><div class="num-circle">07</div><span class="label">Quiz · 7 of 12</span></div>
+  <h2>確認テストで「分かったつもり」を<span class="gold">排除</span></h2>
+  <p class="lead">動画視聴後の理解度を即チェック。3軸（コース別・カテゴリ別・無料体験）すべて稼働中で、自分のペースで習熟度を確認できます。</p>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-num" style="font-size:2.2rem">3<span class="unit">軸構成</span></div>
+      <div class="stat-label">コース別／カテゴリ別／無料体験</div>
+      <div class="stat-desc">受講者の興味と学習ペースに合わせて選択可能。</div>
+    </div>
+    <div class="stat-card featured">
+      <div class="stat-num" style="font-size:2.2rem">即時<span class="unit">解説</span></div>
+      <div class="stat-label">解説付きの正誤判定</div>
+      <div class="stat-desc">なぜ正解／不正解か、その場で解説。間違えた問題は再挑戦可能。</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="font-size:2.2rem">5問<span class="unit">/回</span></div>
+      <div class="stat-label">プールからランダム出題</div>
+      <div class="stat-desc">無料体験は10問プールからランダム5問。コース別は全問体系出題。</div>
+    </div>
+  </div>
+</div>
+
+<!-- 08 -->
+<div class="page slide" style="background:var(--bg-alt)">
+  <div class="slide-tag gold"><div class="num-circle">08</div><span class="label">Continue · 8 of 12</span></div>
+  <h2>続けられる<span class="gold">3つの仕組み</span>を解説</h2>
+  <p class="lead">eラーニングの最大の敵は「継続できない」。短尺動画・確認テスト・スマホ対応の3点で、忙しい現場でも続けられる設計です。</p>
+  <div class="tips-grid">
+    <div class="tip">
+      <span class="tip-emoji">⏱️</span>
+      <h4>1日5分から始める</h4>
+      <p>1本あたり5分前後。通勤中・休憩中・始業前の隙間時間で1本ずつ。週5本で1ヶ月20本＝半年で1コース完了ペース。</p>
+    </div>
+    <div class="tip gold">
+      <span class="tip-emoji">📱</span>
+      <h4>スマホで聞き流す</h4>
+      <p>音声200本は耳だけでも学べる構成。運転中・ジョギング中の聞き流しで、無意識下に知識が蓄積されます。</p>
+    </div>
+    <div class="tip green">
+      <span class="tip-emoji">✅</span>
+      <h4>確認テストで定着</h4>
+      <p>動画視聴後すぐにテスト。「分かったつもり」を排除し、現場で使える知識へ転換します。</p>
+    </div>
+  </div>
+</div>
+
+<!-- =========================== SECTION 3 =========================== -->
+<div class="page-dark divider" style="background:linear-gradient(135deg,#0F1A45 0%,#1A2147 50%,#0A0F2D 100%)">
+  <div class="num-huge">03</div>
+  <div class="inner">
+    <span class="label" style="background:var(--green)">Section Three</span>
+    <h2>運用フロー</h2>
+    <p>人事・教育担当者向けの運用情報。</p>
+  </div>
+</div>
+
+<!-- 09 -->
+<div class="page slide">
+  <div class="slide-tag green"><div class="num-circle">09</div><span class="label">Apply Process · 9 of 12</span></div>
+  <h2>申込みから学習開始までの<span class="gold">6ステップ</span></h2>
+  <p class="lead">フォーム送信 → お見積り → 契約・お振込み → <strong style="color:var(--navy)">パスワード発行</strong> → 学習開始。お振込み確認後、運営からID・パスワードをメール送付します。</p>
+  <div class="two-col">
+    <div class="steps">
+      <div class="step-row">
+        <div class="step-num-big">1</div>
+        <div class="step-content">
+          <h4>フォーム送信</h4>
+          <p>apply.sangyo-tech.jp で希望プランを選択しお申込み。</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num-big">2</div>
+        <div class="step-content">
+          <h4>担当者よりご連絡</h4>
+          <p>3営業日以内に担当より折り返し。要件・人数・希望開始日を確認。</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num-big">3</div>
+        <div class="step-content">
+          <h4>内容確認・ご説明</h4>
+          <p>サービス詳細・支払方法・契約条件をご説明。ご不明点はこの段階で解消。</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num-big">4</div>
+        <div class="step-content">
+          <h4>契約締結・お振込み</h4>
+          <p>銀行振込／カード決済（手数料+4%）から選択。年間プランは1年分一括前払い、月額プランは初月分を先払い。</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num-big">5</div>
+        <div class="step-content">
+          <h4>パスワード発行・送付</h4>
+          <p><strong style="color:var(--navy)">お振込み確認後、運営からID・パスワードを管理者宛にメール送付</strong>します（1〜2営業日以内）。受講者数分のアカウントを一括発行。</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num-big">6</div>
+        <div class="step-content">
+          <h4>学習開始</h4>
+          <p>管理者から受講者へID・パスワードを共有。当日から全コース学習開始可能。</p>
+        </div>
+      </div>
+    </div>
+    <div class="preview">
+      <div class="preview-head"><div class="preview-dots"><span></span><span></span><span></span></div>https://apply.sangyo-tech.jp/</div>
+      <iframe src="https://apply.sangyo-tech.jp/" loading="lazy" title="お申込みページ"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- 10 -->
+<div class="page slide" style="background:var(--bg-alt)">
+  <div class="slide-tag green"><div class="num-circle">10</div><span class="label">Pricing · 10 of 12</span></div>
+  <h2>料金プラン詳細</h2>
+  <p class="lead">3つの料金体系。表示価格はすべて<strong style="color:var(--navy)">税込</strong>。Stripeカード決済時は手数料4%が上乗せされます。</p>
+  <div class="price-row">
+    <div class="price-card">
+      <span class="plan-tag">Monthly</span>
+      <h4>月額プラン</h4>
+      <div class="amount">¥3,300<span class="small">/人・月</span></div>
+      <div class="desc"><strong style="color:var(--navy)">税込</strong> ／ カード決済 ¥3,432<br>1名から契約可・全コース見放題<br>解約はいつでも可能</div>
+    </div>
+    <div class="price-card highlight">
+      <span class="plan-tag">Campaign</span>
+      <h4>年間プラン キャンペーン</h4>
+      <div class="strike">¥33,000</div>
+      <div class="amount">¥16,500<span class="small">/人・年</span></div>
+      <div class="desc"><strong style="color:var(--gold)">50%OFF・〜2026/7/31まで</strong><br>カード決済 ¥17,160<br>10名以上で『品質大全』プレゼント</div>
+    </div>
+    <div class="price-card">
+      <span class="plan-tag">Annual</span>
+      <h4>年間プラン 通常</h4>
+      <div class="amount">¥33,000<span class="small">/人・年</span></div>
+      <div class="desc"><strong style="color:var(--navy)">10ヶ月分一括＋2ヶ月分お得</strong><br>カード決済 ¥34,320<br>10名以上で『品質大全』プレゼント</div>
+    </div>
+  </div>
+  <div class="note"><span class="label-tag">大口契約</span><strong>500名以上</strong>の場合は規模・要件に応じた専用料金にて別途お見積もり。教育体系設計サポート・企業専用コース作成も対応可能。</div>
+</div>
+
+<!-- 11 -->
+<div class="page slide">
+  <div class="slide-tag green"><div class="num-circle">11</div><span class="label">Support · 11 of 12</span></div>
+  <h2>お問い合わせ・サポート窓口</h2>
+  <p class="lead">プラン相談・コンテンツ追加要望・口コミ掲載など、何でもお問い合わせフォームからお送りください。</p>
+  <div class="two-col-rev">
+    <div class="callouts">
+      <div class="callout">
+        <div class="callout-head"><div class="ic">📩</div><strong>申込みフォーム経由（推奨）</strong></div>
+        <p>apply.sangyo-tech.jp の「お問合せ・ご要望・その他」カードを選択 → お問い合わせ内容を記入 → 送信。3営業日以内に返信。</p>
+      </div>
+      <div class="callout gold">
+        <div class="callout-head"><div class="ic">📞</div><strong>担当者直接連絡（契約者向け）</strong></div>
+        <p>契約時にお伝えする担当者連絡先へ直接お電話・メール可能。技術トラブル等は迅速対応します。</p>
+      </div>
+      <div class="callout green">
+        <div class="callout-head"><div class="ic">🤝</div><strong>支援サービス</strong></div>
+        <p>顧問契約・コンサル・AI活用研修・ISO取得支援・業務ツール開発もご相談可能。別途お見積もり。</p>
+      </div>
+    </div>
+    <div class="preview">
+      <div class="preview-head"><div class="preview-dots"><span></span><span></span><span></span></div>https://apply.sangyo-tech.jp/</div>
+      <iframe src="https://apply.sangyo-tech.jp/" loading="lazy" title="お問い合わせフォーム"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- 12 -->
+<div class="page slide" style="background:var(--bg-alt)">
+  <div class="slide-tag green"><div class="num-circle">12</div><span class="label">FAQ · 12 of 12</span></div>
+  <h2>よくある質問</h2>
+  <p class="lead">事前のご検討に役立つ質問と回答をまとめました。詳細は料金ページのFAQセクションでご確認いただけます。</p>
+  <div class="faq">
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-mark">Q</span>無料体験と企業契約の違いは何ですか？</div>
+      <div class="faq-a">無料体験では「品質管理 基礎コース」の一部と確認テストのみご利用いただけます。企業契約では <strong>394本以上の全コンテンツ</strong>＋今後追加機能（閲覧管理・修了証など）もご利用可能です。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-mark">Q</span>申込後、いつログインできるようになりますか？</div>
+      <div class="faq-a"><strong>お振込み確認後、運営から管理者宛にID・パスワードをメール送付</strong>します（1〜2営業日以内）。管理者から受講者へ共有していただき、共有完了後すぐにログイン・学習開始が可能です。無料体験はパスワード不要で即時開始できます。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-mark">Q</span>月途中での申し込みはどうなりますか？</div>
+      <div class="faq-a">月途中のお申し込みでも日割り対応はしておりません。<strong>お申し込み月から所定の料金が発生</strong>いたします。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-mark">Q</span>解約はいつでもできますか？</div>
+      <div class="faq-a">解約はいつでも可能です。ただし契約は年単位（年間プラン）／月単位（月額プラン）となっており、ご入金済みの料金の返金はいたしかねます。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-mark">Q</span>支払い方法・タイミングは？</div>
+      <div class="faq-a">契約開始前にお支払い。<strong>銀行振込</strong>または<strong>Stripeクレジットカード決済（カード手数料4%上乗せ）</strong>から選択可能。請求書発行も対応。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span class="q-mark">Q</span>500名以上の大口はどう申し込めば？</div>
+      <div class="faq-a">個別にご相談のうえお見積もりをご提案。<strong>専用料金・教育体系設計のサポート・企業専用コース作成</strong>も対応可能です。お問い合わせフォームよりご連絡ください。</div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================== FOOTER =========================== -->
+<footer class="doc-footer">
+  <div class="brand-foot">SANGYO TECH ACADEMY</div>
+  <div style="font-size:1.4rem;font-weight:800;margin-bottom:24px">製造業の品質教育を、仕組み化する。</div>
+  <div class="links">
+    <a href="https://sangyo-tech.jp/">TOP</a>
+    <a href="https://pricing.sangyo-tech.jp/">料金プラン</a>
+    <a href="https://apply.sangyo-tech.jp/">お申込み</a>
+    <a href="https://course.sangyo-tech.jp/">コース一覧</a>
+    <a href="https://sangyo-tech.jp/tokushoho/">特定商取引法に基づく表記</a>
+    <a href="https://sangyo-tech.jp/privacy/">プライバシーポリシー</a>
+  </div>
+  <div class="copy">© 産業技術アカデミー | Product by Qulio合同会社<br>本マニュアル v1.8 / 2026年5月6日 更新（カバーレイアウト中央揃え）</div>
+</footer>
+
+</body>
+</html>
